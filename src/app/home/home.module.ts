@@ -5,18 +5,31 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+      animation: false,
+      responsive: true,
+      renderOnClick: false
+    }),
     RouterModule.forChild([
       {
         path: '',
         component: HomePage
       }
-    ])
+    ]),
   ],
   declarations: [HomePage]
 })
