@@ -4,5 +4,5 @@ Simple Ionic / Angular application that helps user to keep track of their workou
 <br>
 <br>
 
-<img src="https://github.com/sanderhelleso/rest/blob/master/preview.jpg" width=300 height=500>
+<img src="https://github.com/sanderhelleso/rest/blob/master/preview.jpg" width=375 height=813>
 
