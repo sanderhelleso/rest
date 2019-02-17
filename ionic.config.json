@@ -1,5 +1,7 @@
 {
   "name": "rest",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

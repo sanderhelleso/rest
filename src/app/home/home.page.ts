@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+	// class props
 	percent: number = 0;
 	radius: number = 100;
 	fullTime: any = '00:01:30';
@@ -15,12 +17,10 @@ export class HomePage {
 	progress: any = 0;
 	minutes: number = 1;
 	seconds: any = 30;
+	elapsed: any = { h: '00', m: '00', s: '00' };
 
-	elapsed: any = {
-		h: '00',
-		m: '00',
-		s: '00'
-	};
+	// initialize insomnia, preventing phone from goint to sleep
+	constructor(private insomnia: Insomnia) { }
 
 	// initialize timer
 	startTimer() {
@@ -46,6 +46,23 @@ export class HomePage {
 			console.log(this.percent);
 		}, 1000);
 	}
+
+	// stop the current active timer
+	stopTimer() {
+
+		clearInterval(this.timer);
+		clearInterval(this.overallTimer);
+
+		this.overallTimer = false;
+		this.timer = false;    
+		this.percent = 0;
+		this.progress = 0;
+		this.elapsed = { h: '00', m: '00', s: '00' };
+		//this.timeLeft = { m: '00', s: '00' };
+
+		//this.remainingTime = `${this.pad(this.timeLeft.m, 2)}:${this.pad(this.timeLeft.s, 2)}`;
+		this.insomnia.allowSleepAgain();
+	  }
 
 	progressTimer() {
 
@@ -78,9 +95,16 @@ export class HomePage {
 	// reset timer
 	resetTimer() {
 
+		// clear current timer
 		if (this.timer) clearInterval(this.timer);
-		if (!this.overallTimer) this.progressTimer();
 
+		// start progress timer and start insomnia
+		if (!this.overallTimer) {
+			this.progressTimer();
+			this.insomnia.keepAwake();
+		}
+
+		// reset values
 		this.timer = false;
 		this.percent = 0;
 		this.progress = 0;
