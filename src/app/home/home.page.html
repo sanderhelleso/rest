@@ -1,6 +1,6 @@
 <ion-content padding>
 
-  <ion-item>
+  <ion-item color="dark">
     <ion-label>Rest Duration</ion-label>
     <ion-datetime 
       display-format="mm:ss" 
@@ -10,7 +10,7 @@
   </ion-item>
 
   <circle-progress
-    (click)="startTime()"
+    (click)="startTimer()"
     [percent]="percent"
     [maxPercent]="100"
     [radius]="radius"
